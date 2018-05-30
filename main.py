@@ -56,14 +56,15 @@ while drawLoop == True:
     yVelocity+=gravity
     fbx-=fbxVal
     y+=yVelocity
-
     if  x>560:
         x=-100
     if  x<-100:
         x=560
     if y>400:
         y=400
-        yVelocity=0
+    if fbx < -100:
+        fbx = 560
+        fby = random.randint(100, 400)
         grounded=True
 
     if keyDown (pygame.K_d):
