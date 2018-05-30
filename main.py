@@ -1,5 +1,5 @@
 import pygame
-
+import random
 
 keys={}
 
@@ -28,11 +28,16 @@ screen = pygame.display.set_mode((510,510))
 drawLoop = True
 clock = pygame.time.Clock()
 poop=pygame.image.load("Poop_Emoji.png")
+fireball=pygame.image.load("Fireball.png")
 
+fbxVal=10
+fbx = 560
+fby = random.randint(100,400)
 x = 0
 y = 0
+grounded=False
 yVelocity=0
-gravity=00.05
+gravity=1
 
 while drawLoop == True:
     #events
@@ -49,22 +54,25 @@ while drawLoop == True:
     #update
     clock.tick(60)
     yVelocity+=gravity
-
+    fbx-=fbxVal
     y+=yVelocity
 
-    if  x>510:
-        x=0
-
+    if  x>560:
+        x=-100
+    if  x<-100:
+        x=560
     if y>400:
-        y=0
-  #      yVelocity=0
+        y=400
+        yVelocity=0
+        grounded=True
 
     if keyDown (pygame.K_d):
-        x += 1
-    if keyDown(pygame.K_w):
-        y -= 10
+        x += 5
+    if keyDown(pygame.K_w) and grounded==True:
+        yVelocity=-30
+        grounded=False
     if keyDown(pygame.K_a):
-        x -= 1
+        x -= 5
 
 
     #draw
@@ -72,6 +80,7 @@ while drawLoop == True:
 
     #pygame.draw.circle(screen, RED,(int(x), 20), 50)
     screen.blit(poop, (int(x), int(y)))
+    screen.blit(fireball, (int(fbx), int(fby)))
 
 
 
