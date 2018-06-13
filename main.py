@@ -35,10 +35,11 @@ fbxVal=10
 fbx = 560
 fby = random.randint(100,400)
 x = 0
-y = 0
+y = 200
 fbx2=0
 fby2=0
-end=True
+n=50
+time=0
 grounded=False
 yVelocity=0
 gravity=1
@@ -54,9 +55,10 @@ while drawLoop == True:
             keys[event.key] = False
 
 
-
     #update
+    time+=1
     clock.tick(60)
+    print(time)
     yVelocity+=gravity
     fbx2-=fbxVal2-5
     fbx-=fbxVal-3
@@ -76,14 +78,9 @@ while drawLoop == True:
     if fbx2 < -100:
         fbx2 = 560
         fby2 = y
-    if fby and fbx == y and y or fby2 and fbx2 == y and y:
-        while end==True:
-            fby=0
-            fbx=0
-            fbx2=0
-            fby2=0
-            y=0
-            x=0
+    if (abs(fby2 - y - -10) < n and abs(fbx2 - x) < n) or (abs(fby - y - -10) < n and abs(fbx - x) < n):
+        quit()
+
 
     if keyDown (pygame.K_d):
         x += 5
